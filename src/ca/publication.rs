@@ -20,6 +20,7 @@ use crate::repository::aspa::Aspa;
 use crate::crypto::Signer;
 use crate::crypto::SigningError;
 use crate::repository::error::ValidationError;
+use crate::repository::pad::Pad;
 use crate::repository::x509::{Time, Validity};
 use crate::rrdp;
 use crate::uri;
@@ -1478,6 +1479,12 @@ impl From<&Roa> for Base64 {
 impl From<&Aspa> for Base64 {
     fn from(aspa: &Aspa) -> Self {
         Base64::from_content(&aspa.to_captured().into_bytes())
+    }
+}
+
+impl From<&Pad> for Base64 {
+    fn from(pad: &Pad) -> Self {
+        Base64::from_content(&pad.to_captured().into_bytes())
     }
 }
 
